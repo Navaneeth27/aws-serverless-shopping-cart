@@ -24,7 +24,7 @@ custom:
 
 
 package:
-  artifact: assignment.zip
+  artifact: /assignment.zip
 
 functions:
   addcart:
