@@ -1,0 +1,33 @@
+service: cartapp
+
+provider:
+  name: aws
+  runtime: python3.8
+  profile: default
+  region: eu-west-1
+  stage: ${opt:stage, 'demo'}
+  role: arn:aws:iam::320542636300:role/cart-addcart-demo
+  deploymentBucket: navaneeth-assignment-code
+  environment:
+    LOG_LEVEL : ${self:custom.config.${self:provider.stage}.LOG_LEVEL}
+#    TABLE_NAME: ${self:custom.config.${self:provider.stage}.TABLE_NAME}
+
+custom:
+  config:
+    demo:
+      LOG_LEVEL: INFO
+     # TABLE_NAME: ${ssm:/cartapp/demo/TABLE_NAME}
+
+    prod:
+      LOG_LEVEL: ERROR
+     # TABLE_NAME: ${ssm:/cartapp/prod/TABLE_NAME}
+
+
+package:
+  artifact: assignment.zip
+
+functions:
+  addcart:
+    name: addcart
+    handler: handler.add_to_cart
+    runtime: python3.8
