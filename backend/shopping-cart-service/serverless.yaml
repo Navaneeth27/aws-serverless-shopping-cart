@@ -3,7 +3,7 @@ service: cartapp
 provider:
   name: aws
   runtime: python3.8
-  profile: default
+  profile: assignment
   region: eu-west-1
   stage: ${opt:stage, 'demo'}
   role: arn:aws:iam::320542636300:role/cart-addcart-demo
